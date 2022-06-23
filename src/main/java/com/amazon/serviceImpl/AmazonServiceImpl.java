@@ -2,12 +2,15 @@ package com.amazon.serviceImpl;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazon.model.Employee;
 import com.amazon.model.Header;
 import com.amazon.model.Phone;
 import com.amazon.model.User;
@@ -16,9 +19,13 @@ import com.amazon.model.Validator;
 import com.amazon.repository.AmazonRepository;
 import com.amazon.service.AmazonService;
 
+import ch.qos.logback.classic.Logger;
+
 @Service
 public class AmazonServiceImpl implements AmazonService {
 
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(AmazonServiceImpl.class);
+	
 	@Autowired
 	AmazonRepository repository;
 
@@ -153,6 +160,19 @@ public class AmazonServiceImpl implements AmazonService {
 		u.setHeader(h);
 		u.setUser(l);
 		return u;
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		logger.info("Inside Service - getAllEmployees()");
+		List<Employee> e = new ArrayList<Employee>();
+		Employee e1 = new Employee(1,"VK",10000);
+		Employee e2 = new Employee(2,"SK",15000);
+		Employee e3 = new Employee(3,"MK",13000);
+		Employee e4 = new Employee(4,"KK",12000);
+		Employee e5 = new Employee(5,"JK",20000);
+		e=Arrays.asList(e1,e2,e3,e4,e5);
+		return e;		
 	}
 
 }
